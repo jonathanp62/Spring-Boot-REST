@@ -39,13 +39,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class SpringBootMainApplicationTests {
+class SpringBootMainApplicationTests {
+    @Autowired
+    private PersonController controller;
+
     SpringBootMainApplicationTests() {
         super();
     }
 
     @Test
     void testContextLoads() {
-
+        assertThat(this.controller).isNotNull();
     }
 }

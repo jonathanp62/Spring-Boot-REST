@@ -1,11 +1,11 @@
 package net.jmp.spring.boot.rest;
 
 /*
- * (#)SpringBootMainApplication.java    0.1.0   01/27/2024
+ * (#)Person.java   0.2.0   01/27/2024
  *
  * @author    Jonathan Parker
- * @version   0.1.0
- * @since     0.1.0
+ * @version   0.2.0
+ * @since     0.2.0
  *
  * MIT License
  *
@@ -30,17 +30,11 @@ package net.jmp.spring.boot.rest;
  * SOFTWARE.
  */
 
-import org.springframework.boot.SpringApplication;
-
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class SpringBootMainApplication {
-    public SpringBootMainApplication() {
-        super();
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootMainApplication.class, args);
-    }
+public record Person(
+        long id,
+        String lastName,
+        String firstName,
+        String phoneNumber,
+        String emailAddress
+) {
 }
