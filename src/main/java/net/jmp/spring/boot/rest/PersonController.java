@@ -39,10 +39,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api")
 public class PersonController {
     private final Logger logger = LoggerFactory.getLogger(PersonController.class);
     private final Map<Long, Person> people;
@@ -60,7 +62,7 @@ public class PersonController {
         this.defaultPerson = new Person(0L, "Last", "First", "Phone", "Email");
     }
 
-    @GetMapping("/api/person")
+    @GetMapping("/person")
     public Person person(final @RequestParam(required = false) Long id) {
         if (id == null)
             return this.defaultPerson;
@@ -73,7 +75,7 @@ public class PersonController {
         return this.people.getOrDefault(id, this.defaultPerson);  // @todo Return a 404
     }
 
-    @GetMapping("/api/people")
+    @GetMapping("/people")
     public List<Person> people() {
         return new ArrayList<>(this.people.values());
     }
