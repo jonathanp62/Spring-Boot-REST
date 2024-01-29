@@ -1,10 +1,11 @@
 package net.jmp.spring.boot.rest;
 
 /*
+ * (#)PersonController.java 0.3.0   01/29/2024
  * (#)PersonController.java 0.2.0   01/27/2024
  *
  * @author    Jonathan Parker
- * @version   0.2.0
+ * @version   0.3.0
  * @since     0.2.0
  *
  * MIT License
@@ -30,6 +31,8 @@ package net.jmp.spring.boot.rest;
  * SOFTWARE.
  */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -51,27 +54,27 @@ public class PersonController {
         this.people = Map.of(
             1L, new Person(1L, "Parker", "Jonathan", "555-123-4567", "jonathan@domain.com"),
             2L, new Person(2L, "Kirk", "James", "555-234-5678", "james@domain.com"),
-            3L, new Person(2L, "McCoy", "Leonard", "555-345-6789", "leonard@domain.com")
+            3L, new Person(3L, "McCoy", "Leonard", "555-345-6789", "leonard@domain.com")
         );
 
         this.defaultPerson = new Person(0L, "Last", "First", "Phone", "Email");
     }
 
-    @GetMapping("/person")
-    public Person person(final @RequestParam(required = false) String id) {
+    @GetMapping("/api/person")
+    public Person person(final @RequestParam(required = false) Long id) {
         if (id == null)
             return this.defaultPerson;
 
-        final var longId = Long.parseLong(id);
-
-        // @todo Learn how to enable debug level
-
-        if (this.logger.isInfoEnabled()) {
-            this.logger.info("id    : {}", id);
-            this.logger.info("longId: {}", longId);
-            this.logger.info("people: {}", this.people.entrySet());
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("id    : {}", id);
+            this.logger.debug("people: {}", this.people.entrySet());
         }
 
-        return this.people.getOrDefault(longId, this.defaultPerson);  // @todo Return a 404
+        return this.people.getOrDefault(id, this.defaultPerson);  // @todo Return a 404
+    }
+
+    @GetMapping("/api/people")
+    public List<Person> people() {
+        return new ArrayList<>(this.people.values());
     }
 }
