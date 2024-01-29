@@ -1,11 +1,12 @@
 package net.jmp.spring.boot.rest;
 
 /*
+ * (#)Person.java   0.4.0   01/29/2024
  * (#)Person.java   0.3.0   01/29/2024
  * (#)Person.java   0.2.0   01/27/2024
  *
  * @author    Jonathan Parker
- * @version   0.3.0
+ * @version   0.4.0
  * @since     0.2.0
  *
  * MIT License
@@ -33,7 +34,7 @@ package net.jmp.spring.boot.rest;
 
 public record Person(
         String status,
-        long id,
+        Long id,
         String lastName,
         String firstName,
         String phoneNumber,

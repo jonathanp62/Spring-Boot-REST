@@ -1,11 +1,12 @@
 package net.jmp.spring.boot.rest;
 
 /*
+ * (#)PersonController.java 0.4.0   01/29/2024
  * (#)PersonController.java 0.3.0   01/29/2024
  * (#)PersonController.java 0.2.0   01/27/2024
  *
  * @author    Jonathan Parker
- * @version   0.3.0
+ * @version   0.4.0
  * @since     0.2.0
  *
  * MIT License
@@ -32,6 +33,7 @@ package net.jmp.spring.boot.rest;
  */
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -77,6 +79,10 @@ public class PersonController {
 
     @GetMapping("/people")
     public List<Person> people() {
-        return new ArrayList<>(this.people.values());
+        final var persons = new ArrayList<>(this.people.values());
+
+        persons.sort(Comparator.comparing(Person::id));
+
+        return persons;
     }
 }
