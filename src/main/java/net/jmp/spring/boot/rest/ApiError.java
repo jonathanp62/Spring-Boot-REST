@@ -1,12 +1,11 @@
 package net.jmp.spring.boot.rest;
 
 /*
- * (#)Person.java   0.3.0   01/29/2024
- * (#)Person.java   0.2.0   01/27/2024
+ * (#)ApiError.java 0.3.0   01/29/2024
  *
  * @author    Jonathan Parker
  * @version   0.3.0
- * @since     0.2.0
+ * @since     0.3.0
  *
  * MIT License
  *
@@ -31,12 +30,8 @@ package net.jmp.spring.boot.rest;
  * SOFTWARE.
  */
 
-public record Person(
+public record ApiError(
         String status,
-        long id,
-        String lastName,
-        String firstName,
-        String phoneNumber,
-        String emailAddress
-) {
+        String message
+){
 }

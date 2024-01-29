@@ -38,6 +38,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,31 +51,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
     private final Logger logger = LoggerFactory.getLogger(PersonController.class);
     private final Map<Long, Person> people;
-    private final Person defaultPerson;
 
     PersonController() {
         super();
 
         this.people = Map.of(
-            1L, new Person(1L, "Parker", "Jonathan", "555-123-4567", "jonathan@domain.com"),
-            2L, new Person(2L, "Kirk", "James", "555-234-5678", "james@domain.com"),
-            3L, new Person(3L, "McCoy", "Leonard", "555-345-6789", "leonard@domain.com")
+            1L, new Person("OK", 1L, "Parker", "Jonathan", "555-123-4567", "jonathan@domain.com"),
+            2L, new Person("OK", 2L, "Kirk", "James", "555-234-5678", "james@domain.com"),
+            3L, new Person("OK", 3L, "McCoy", "Leonard", "555-345-6789", "leonard@domain.com")
         );
-
-        this.defaultPerson = new Person(0L, "Last", "First", "Phone", "Email");
     }
 
     @GetMapping("/person")
-    public Person person(final @RequestParam(required = false) Long id) {
-        if (id == null)
-            return this.defaultPerson;
-
+    public ResponseEntity<Object> person(final @RequestParam(required = true) Long id) {
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("id    : {}", id);
             this.logger.debug("people: {}", this.people.entrySet());
         }
 
-        return this.people.getOrDefault(id, this.defaultPerson);  // @todo Return a 404
+        if (this.people.containsKey(id))
+            return new ResponseEntity<>(this.people.get(id), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(new ApiError("Not OK", String.format("No person was found with id %d", id)), HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/people")
