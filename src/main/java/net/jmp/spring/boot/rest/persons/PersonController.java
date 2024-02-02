@@ -1,12 +1,13 @@
-package net.jmp.spring.boot.rest;
+package net.jmp.spring.boot.rest.persons;
 
 /*
+ * (#)PersonController.java 0.5.0   02/02/2024
  * (#)PersonController.java 0.4.0   01/29/2024
  * (#)PersonController.java 0.3.0   01/29/2024
  * (#)PersonController.java 0.2.0   01/27/2024
  *
  * @author    Jonathan Parker
- * @version   0.4.0
+ * @version   0.5.0
  * @since     0.2.0
  *
  * MIT License
@@ -37,6 +38,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import net.jmp.spring.boot.rest.ApiError;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +52,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v2")
 public class PersonController {
     private final Logger logger = LoggerFactory.getLogger(PersonController.class);
     private final Map<Long, Person> people;

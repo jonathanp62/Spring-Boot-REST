@@ -1,12 +1,11 @@
-package net.jmp.spring.boot.rest;
+package net.jmp.spring.boot.rest.quotes;
 
 /*
- * (#)SpringBootMainApplicationTests.java   0.5.0   02/02/2024
- * (#)SpringBootMainApplicationTests.java   0.1.0   01/27/2024
+ * (#)QuoteRepository.java  0.5.0   02/02/2024
  *
  * @author    Jonathan Parker
  * @version   0.5.0
- * @since     0.1.0
+ * @since     0.5.0
  *
  * MIT License
  *
@@ -31,31 +30,7 @@ package net.jmp.spring.boot.rest;
  * SOFTWARE.
  */
 
-import net.jmp.spring.boot.rest.persons.PersonController;
-import net.jmp.spring.boot.rest.quotes.QuoteController;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class SpringBootMainApplicationTests {
-    @Autowired
-    private PersonController personController;
-    @Autowired
-    private QuoteController quoteController;
-
-    SpringBootMainApplicationTests() {
-        super();
-    }
-
-    @Test
-    void testContextLoads() {
-        assertThat(this.personController).isNotNull();
-        assertThat(this.quoteController).isNotNull();
-    }
+public interface QuoteRepository extends JpaRepository<Quote, Long> {
 }

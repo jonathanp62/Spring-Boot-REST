@@ -1,10 +1,11 @@
-package net.jmp.spring.boot.rest;
+package net.jmp.spring.boot.rest.persons;
 
 /*
- * (#)PersonControllerIntegrationTests.java 0.1.0   01/30/2024
+ * (#)PersonControllerIntegrationTests.java 0.5.0   02/02/2024
+ * (#)PersonControllerIntegrationTests.java 0.4.0   01/30/2024
  *
  * @author    Jonathan Parker
- * @version   0.4.0
+ * @version   0.5.0
  * @since     0.4.0
  *
  * MIT License
@@ -31,6 +32,9 @@ package net.jmp.spring.boot.rest;
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import net.jmp.spring.boot.rest.ApiError;
+
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +57,7 @@ public class PersonControllerIntegrationTests {
 
     @Test
     void testNoId() throws Exception {
-        final ResponseEntity<Person> response = template.getForEntity("/api/person", Person.class);
+        final ResponseEntity<Person> response = template.getForEntity("/api/v2/person", Person.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
@@ -69,7 +73,7 @@ public class PersonControllerIntegrationTests {
                 "jonathan@domain.com"
         );
 
-        final ResponseEntity<Person> response = template.getForEntity("/api/person?id=1", Person.class);
+        final ResponseEntity<Person> response = template.getForEntity("/api/v2/person?id=1", Person.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(expectedPerson);
@@ -86,7 +90,7 @@ public class PersonControllerIntegrationTests {
                 "james@domain.com"
         );
 
-        final ResponseEntity<Person> response = template.getForEntity("/api/person?id=2", Person.class);
+        final ResponseEntity<Person> response = template.getForEntity("/api/v2/person?id=2", Person.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(expectedPerson);
@@ -103,7 +107,7 @@ public class PersonControllerIntegrationTests {
                 "leonard@domain.com"
         );
 
-        final ResponseEntity<Person> response = template.getForEntity("/api/person?id=3", Person.class);
+        final ResponseEntity<Person> response = template.getForEntity("/api/v2/person?id=3", Person.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(expectedPerson);
@@ -116,7 +120,7 @@ public class PersonControllerIntegrationTests {
                 "No person was found with id 4"
         );
 
-        final ResponseEntity<ApiError> response = template.getForEntity("/api/person?id=4", ApiError.class);
+        final ResponseEntity<ApiError> response = template.getForEntity("/api/v2/person?id=4", ApiError.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(response.getBody()).isEqualTo(expectedApiError);
@@ -133,7 +137,7 @@ public class PersonControllerIntegrationTests {
         final var objectMapper = new ObjectMapper();
         final var expectedJson = objectMapper.writeValueAsString(expectedPeople);
 
-        final ResponseEntity<String> response = template.getForEntity("/api/people", String.class);
+        final ResponseEntity<String> response = template.getForEntity("/api/v2/people", String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(expectedJson);

@@ -1,12 +1,11 @@
-package net.jmp.spring.boot.rest;
+package net.jmp.spring.boot.rest.quotes;
 
 /*
- * (#)SpringBootMainApplicationTests.java   0.5.0   02/02/2024
- * (#)SpringBootMainApplicationTests.java   0.1.0   01/27/2024
+ * (#)QuoteResource.java    0.5.0   02/02/2024
  *
  * @author    Jonathan Parker
  * @version   0.5.0
- * @since     0.1.0
+ * @since     0.5.0
  *
  * MIT License
  *
@@ -31,31 +30,53 @@ package net.jmp.spring.boot.rest;
  * SOFTWARE.
  */
 
-import net.jmp.spring.boot.rest.persons.PersonController;
-import net.jmp.spring.boot.rest.quotes.QuoteController;
+import java.util.Objects;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class QuoteResource {
+    private String type;
+    private Quote value;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class SpringBootMainApplicationTests {
-    @Autowired
-    private PersonController personController;
-    @Autowired
-    private QuoteController quoteController;
-
-    SpringBootMainApplicationTests() {
-        super();
+    QuoteResource(final Quote value, final String type) {
+        this.value = value;
+        this.type = type;
     }
 
-    @Test
-    void testContextLoads() {
-        assertThat(this.personController).isNotNull();
-        assertThat(this.quoteController).isNotNull();
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(final String type) {
+        this.type = type;
+    }
+
+    public Quote getValue() {
+        return this.value;
+    }
+
+    public void setValue(final Quote value) {
+        this.value = value;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o)
+            return true;
+
+        if (!(o instanceof QuoteResource))
+            return false;
+
+        final QuoteResource that = (QuoteResource) o;
+
+        return Objects.equals(this.type, that.type) && Objects.equals(this.value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.type, this.value);
+    }
+
+    @Override
+    public String toString() {
+        return "QuoteResource{" + "type='" + this.type + '\'' + ", value=" + this.value + '}';
     }
 }

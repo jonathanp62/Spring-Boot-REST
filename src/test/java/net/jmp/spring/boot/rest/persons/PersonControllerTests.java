@@ -1,10 +1,11 @@
-package net.jmp.spring.boot.rest;
+package net.jmp.spring.boot.rest.persons;
 
 /*
+ * (#)PersonControllerTests.java    0.5.0   02/02/2024
  * (#)PersonControllerTests.java    0.4.0   01/29/2024
  *
  * @author    Jonathan Parker
- * @version   0.4.0
+ * @version   0.5.0
  * @since     0.4.0
  *
  * MIT License
@@ -33,6 +34,8 @@ package net.jmp.spring.boot.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
+
+import net.jmp.spring.boot.rest.ApiError;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -75,7 +78,7 @@ public class PersonControllerTests {
         final var objectMapper = new ObjectMapper();
         final var expectedJson = objectMapper.writeValueAsString(expectedPerson);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/person?id=1"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/v2/person?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(expectedJson));
     }
@@ -94,7 +97,7 @@ public class PersonControllerTests {
         final var objectMapper = new ObjectMapper();
         final var expectedJson = objectMapper.writeValueAsString(expectedPerson);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/person?id=2"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/v2/person?id=2"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(expectedJson));
     }
@@ -113,7 +116,7 @@ public class PersonControllerTests {
         final var objectMapper = new ObjectMapper();
         final var expectedJson = objectMapper.writeValueAsString(expectedPerson);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/person?id=3"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/v2/person?id=3"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(expectedJson));
     }
@@ -128,7 +131,7 @@ public class PersonControllerTests {
         final var objectMapper = new ObjectMapper();
         final var expectedJson = objectMapper.writeValueAsString(expectedApiError);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/person?id=4"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/v2/person?id=4"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string(expectedJson));
     }
@@ -144,7 +147,7 @@ public class PersonControllerTests {
         final var objectMapper = new ObjectMapper();
         final var expectedJson = objectMapper.writeValueAsString(expectedPeople);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/people"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/v2/people"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(expectedJson));
     }

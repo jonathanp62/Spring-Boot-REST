@@ -1,4 +1,4 @@
-package net.jmp.spring.boot.rest;
+package net.jmp.spring.boot.rest.persons;
 
 /*
  * (#)Person.java   0.4.0   01/29/2024

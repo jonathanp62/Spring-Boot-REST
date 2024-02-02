@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
+ (#)pom.xml	0.5.0	02/02/2024
  (#)pom.xml	0.4.0	01/29/2024
  (#)pom.xml	0.3.0	01/29/2024
  (#)pom.xml	0.2.0	01/27/2024
  (#)pom.xml	0.1.0	01/27/2024
 
  @author   Jonathan Parker
- @version  0.4.0
+ @version  0.5.0
  @since    0.1.0
 
  MIT License
@@ -44,7 +45,7 @@
 	</parent>
 	<groupId>net.jmp.spring.boot.rest</groupId>
 	<artifactId>spring-boot-rest</artifactId>
-	<version>0.4.0</version>
+	<version>0.5.0</version>
 	<name>Spring Boot REST</name>
 	<description>A simple REST project for Spring Boot</description>
 	<properties>
@@ -52,8 +53,9 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -61,8 +63,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
