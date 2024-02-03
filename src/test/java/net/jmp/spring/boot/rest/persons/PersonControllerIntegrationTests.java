@@ -33,8 +33,6 @@ package net.jmp.spring.boot.rest.persons;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import net.jmp.spring.boot.rest.ApiError;
-
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;

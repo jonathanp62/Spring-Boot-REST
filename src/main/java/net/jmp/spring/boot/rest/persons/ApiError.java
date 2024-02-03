@@ -1,4 +1,4 @@
-package net.jmp.spring.boot.rest;
+package net.jmp.spring.boot.rest.persons;
 
 /*
  * (#)ApiError.java 0.3.0   01/29/2024
