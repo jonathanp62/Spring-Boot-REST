@@ -69,9 +69,7 @@ public class QuoteController {
         return getOne(nextLong(1, repository.count() + 1));
     }
 
-    // @todo Fix this to return a number between 1 and 10
-
     private long nextLong(final long lowerRange, final long upperRange) {
-        return (RANDOMIZER.nextLong() * (upperRange - lowerRange)) + lowerRange;
+        return (long) (RANDOMIZER.nextDouble() * (upperRange - lowerRange)) + lowerRange;
     }
 }

@@ -51,19 +51,19 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PersonControllerIntegrationTests {
+class PersonControllerIntegrationTests {
     @Autowired
     private TestRestTemplate template;
 
     @Test
-    void testNoId() throws Exception {
+    void testNoId() {
         final ResponseEntity<Person> response = template.getForEntity("/api/v2/person", Person.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
-    void testId1() throws Exception {
+    void testId1() {
         final var expectedPerson = new Person(
                 "OK",
                 1L,
@@ -80,7 +80,7 @@ public class PersonControllerIntegrationTests {
     }
 
     @Test
-    void testId2() throws Exception {
+    void testId2() {
         final var expectedPerson = new Person(
                 "OK",
                 2L,
@@ -97,7 +97,7 @@ public class PersonControllerIntegrationTests {
     }
 
     @Test
-    void testId3() throws Exception {
+    void testId3() {
         final var expectedPerson = new Person(
                 "OK",
                 3L,
@@ -114,7 +114,7 @@ public class PersonControllerIntegrationTests {
     }
 
     @Test
-    void testInvalidId() throws Exception {
+    void testInvalidId() {
         final var expectedApiError = new ApiError(
                 "Not OK",
                 "No person was found with id 4"
